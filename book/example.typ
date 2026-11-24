@@ -10,8 +10,8 @@
 #book.table-of-contents()
 
 #set page(numbering: "i")
-#book.chapter("Introduction", lorem(777))
 #book.chapter("Preface", lorem(777))
+#book.chapter("Introduction", lorem(777))
 
 #set page(numbering: "1")
 #book.part(
