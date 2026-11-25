@@ -16,8 +16,12 @@
 }
 
 #let get-heading() = {
-    let headings = query(selector(heading).before(here()))
-    if headings.len() == 0 { return none }
+    let headings = query(
+        selector(label("chapter")).or(label("part")).before(here()),
+    )
+    if headings.len() == 0 {
+        return document.author.join(", ")
+    }
     headings.last().body
 }
 
