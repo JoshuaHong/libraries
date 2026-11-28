@@ -17,29 +17,33 @@
 //         margins? (auto, relative, dictionary) - The margins of the page.
 //                 Default: auto (2.5/21 * min(width, height)).
 //
-//     cover(title, subtitle, author, image, blank-page) - Create the cover.
-//             Always starts on a new page.
+//     cover(title, subtitle, title-position, author, author-position, image,
+//             new-page) - Create the cover. Always starts on a new page.
 //         title (content) - The title of the book.
 //         subtitle? (none, content) - The subtitle of the book. Default: none.
+//         title-position? (alignment) - The position of the title. Default:
+//                 center + top.
 //         author? (str, array) - The author(s) of the book. Default: ()
+//         author-position? (alignment) - The position of the author. Default:
+//                 center + bottom.
 //         image? (none, path) - The image of the cover. Default: none.
-//         blank-page? (str) - Whether to add a blank page before the cover.
+//         new-page? (str) - Whether to add a blank page before the cover.
 //                 Default: "odd"
 //             odd - Start the cover on an odd page and add a blank page before
-//             the cover if necessary.
+//                     the cover if necessary.
 //             even - Start the cover on an even page and add a blank page
-//             before the cover if necessary.
+//                     before the cover if necessary.
 //
-//     table-of-contents(blank-page) - Create the table of contents. Always
-//             starts on a new page.
-//         blank-page? (str) - Whether to add a blank page before the table of
+//     table-of-contents(new-page) - Create the table of contents. Always starts
+//             on a new page.
+//         new-page? (str) - Whether to add a blank page before the table of
 //                 contents. Default: "odd"
 //             odd - Start the table of contents on an odd page and add a blank
 //                     page before the table of contents if necessary.
 //             even - Start the table of contents on an even page and add a
 //                     blank page before the table of contents if necessary.
 //
-//     part(title, subtitle, ..content, blank-page) - Create a new part. Prints
+//     part(title, subtitle, ..content, new-page) - Create a new part. Prints
 //             the title and subtitle followed by the contents. Always starts on
 //             a new page.
 //         title (content) - The title of the part.
@@ -47,7 +51,7 @@
 //                 before the title but not shown in the header nor the table of
 //                 contents.
 //         content (none, content) - The content belonging to the part.
-//         blank-page? (str) - Whether to add a blank page before the part.
+//         new-page? (str) - Whether to add a blank page before the part.
 //                 Default: "odd"
 //             odd - Start the part on an odd page and add a blank page before
 //                     the part if necessary.
@@ -102,23 +106,33 @@
 #let cover(
     title,
     subtitle: none,
+    title-position: center + top,
     author: (),
+    author-position: center + bottom,
     image: none,
-    blank-page: "odd",
-) = cover-impl.cover(title, subtitle, author, image, blank-page)
+    new-page: "odd",
+) = cover-impl.cover(
+    title,
+    subtitle,
+    title-position,
+    author,
+    author-position,
+    image,
+    new-page,
+)
 
 // Create the table of contents.
 #let table-of-contents(
-    blank-page: "odd",
-) = table-of-contents-impl.table-of-contents(blank-page)
+    new-page: "odd",
+) = table-of-contents-impl.table-of-contents(new-page)
 
 // Create a new part.
 #let part(
     title,
     subtitle: none,
     ..content,
-    blank-page: "odd",
-) = part-impl.part(title, subtitle, ..content, blank-page)
+    new-page: "odd",
+) = part-impl.part(title, subtitle, ..content, new-page)
 
 // Create a new chapter.
 #let chapter(

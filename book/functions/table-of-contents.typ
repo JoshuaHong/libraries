@@ -3,7 +3,7 @@
 #import "utils/new-page.typ": newpage
 #import "utils/spacing.typ": chapter-spacing
 
-#let table-of-contents(blank-page) = context {
+#let table-of-contents(new-page) = context {
     show outline: it => {
         show heading: it => {
             align(center, smallcaps(lower(it.body)))
@@ -31,7 +31,7 @@
         }
     }
 
-    newpage(blank-page, always-new-page: true)
+    newpage(new-page, always-new-page: true)
     set page(header: none, footer: none, columns: 1)
     v(chapter-spacing(page))
     outline()

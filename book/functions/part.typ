@@ -5,8 +5,8 @@
 
 #let offset = state("offset", 0)
 
-#let part(title, subtitle, ..content, blank-page) = context {
-    newpage(blank-page, always-new-page: true)
+#let part(title, subtitle, ..content, new-page) = context {
+    newpage(new-page, always-new-page: true)
     part-page(title, subtitle, offset.get())
 
     offset.update(x => x + 1)
